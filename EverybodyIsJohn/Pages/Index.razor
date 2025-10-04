@@ -1,0 +1,13 @@
+﻿@page "/"
+
+<h1>Everybody is John!</h1>
+
+<button @onclick=CreateGame>Create New Game</button>
+
+<h2>Available games:</h2>
+<ul>
+    @foreach (var game in AvailableGames)
+    {
+        <li><a href="GameLobby/@game.Id">@game.Id - @game.Participants players</a></li>
+    }
+</ul>

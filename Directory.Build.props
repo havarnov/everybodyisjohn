@@ -1,0 +1,16 @@
+<Project DefaultTargets="Build">
+ <PropertyGroup>
+   <TargetFramework>net9.0</TargetFramework>
+   <Nullable>enable</Nullable>
+   <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+   <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+   <EnableNETAnalyzers>true</EnableNETAnalyzers>
+   <AnalysisModeStyle>Recommended</AnalysisModeStyle>
+   <GenerateDocumentationFile>true</GenerateDocumentationFile>
+   <WarningsAsErrors>
+     <!-- IDE0320: Make anonymous function static -->
+     IDE0320;
+   </WarningsAsErrors>
+   <NoWarn>CS1591;IDE0008;IDE0046;</NoWarn>
+ </PropertyGroup>
+</Project>

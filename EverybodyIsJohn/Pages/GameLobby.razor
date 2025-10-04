@@ -1,0 +1,64 @@
+@page "/GameLobby/{GameId}"
+<h3>GameLobby @GameId</h3>
+
+@if (IsHost)
+{
+    <p>
+        <button @onclick=StartGame disabled="@(!HasJoined || IsStarting)">
+            @if (IsStarting)
+            {
+                <text>Starting...</text>
+            }
+            else if (HasJoined)
+            {
+                <text>Start game.</text>
+            }
+            else
+            {
+                <text>Not joined</text>
+            }
+        </button>
+    </p>
+}
+
+<form @onsubmit=JoinGame>
+    <fieldset disabled="@IsStarting">
+        <legend>nick & obsession</legend>
+        <p>
+            <input id="nickname" placeholder="Nickname" @bind="Nickname"/>
+        </p>
+
+        <p>
+            <textarea id="obsession" placeholder="Obsession" @bind="Obsession">
+            </textarea>
+        </p>
+
+        <p>
+            <button>@(HasJoined ? "Change" : "Join")</button>
+        </p>
+    </fieldset>
+</form>
+
+@if (JoinError is not null)
+{
+    <p>@JoinError</p>
+}
+
+@if (HasJoined)
+{
+    <form @onsubmit=AddLobbyMessage>
+        <fieldset disabled="@IsStarting">
+            <legend>chat</legend>
+            <textarea id="lobbyMessages" disabled="disabled" style="min-width: 512px; min-height: 100px;">
+                @foreach (var msg in LobbyMessages)
+                {
+                    @($"{msg.Nickname}: {msg.Message}\r\n")
+                }
+            </textarea>
+            <p>
+                <input id="lobbyMsg" placeholder="something to say..." @bind="NewLobbyMessage" style="min-width: 300px;"/>
+                <button>Send</button>
+            </p>
+        </fieldset>
+    </form>
+}

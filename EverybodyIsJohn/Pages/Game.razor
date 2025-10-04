@@ -1,0 +1,30 @@
+@page "/Game/{GameId}"
+
+<h3>Game @GameId</h3>
+
+<p>
+    Your obsession: @Obsession
+</p>
+
+<p>
+    @HeaderInfo
+</p>
+
+<textarea id="lobbyMessages" disabled="disabled" style="min-width: 1024px; min-height: 512px;">
+    @foreach (var msg in Messages)
+    {
+        @($"{msg}\r\n")
+    }
+</textarea>
+
+<hr />
+
+<form @onsubmit=AddInput>
+    <textarea id="msg" placeholder="what should john do next?" @bind="NewInput" disabled="@(!InputEnabled)" style="min-width: 512px; min-height: 100px;"></textarea>
+    <button disabled="@(!InputEnabled)">Send</button>
+</form>
+
+Your current submission:
+<p>
+    @CurrentSubmission
+</p>
